@@ -22,7 +22,7 @@ Base.metadata.create_all(bind=engine)
 
 # Initialize FastAPI app
 app = FastAPI(
-    title="UBA-Lite API",
+    title="JIREH UBA-LITE API",
     description="Log-Based Insider Threat Detection System",
     version="1.0.0",
     docs_url="/docs",
@@ -52,7 +52,7 @@ app.include_router(router, prefix="/api")
 async def root():
     """Root endpoint - API health check"""
     return {
-        "message": "UBA-Lite API is running",
+        "message": "JIREH UBA-LITE API is running",
         "version": "1.0.0",
         "docs": "/docs"
     }

@@ -70,7 +70,7 @@ const WelcomeMark = ({ stats = defaultStats, loading = false, onViewAlerts }) =>
             {username}
           </VuiTypography>
           <VuiTypography color="text" variant="button" fontWeight="regular" mb="16px">
-            Your UBA-Lite overview is ready. Review monitored accounts, escalations, and deployed models at a glance.
+            Your JIREH UBA-LITE overview is ready. Review monitored accounts, escalations, and deployed models at a glance.
           </VuiTypography>
           <Grid container spacing={1.5} mb={2} columns={12}>
             {metrics.map((metric, index) => (

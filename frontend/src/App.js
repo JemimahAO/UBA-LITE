@@ -116,7 +116,7 @@ export default function App() {
             <Sidenav
               color={sidenavColor}
               brand=""
-              brandName="UBA-LITE"
+              brandName="JIREH UBA-LITE"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
@@ -138,7 +138,7 @@ export default function App() {
           <Sidenav
             color={sidenavColor}
             brand=""
-            brandName="UBA-LITE"
+            brandName="JIREH UBA-LITE"
             routes={routes}
             onMouseEnter={handleOnMouseEnter}
             onMouseLeave={handleOnMouseLeave}

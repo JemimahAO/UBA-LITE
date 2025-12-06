@@ -1,10 +1,10 @@
-# UBA-LITE: Lightweight User Behavior Analytics for Insider Threat Detection
+# JIREH UBA-LITE: Lightweight User Behavior Analytics for Insider Threat Detection
 
 > A production-ready insider threat detection system using machine learning to identify anomalous user behavior patterns.
 
 ## Overview
 
-**UBA-LITE** is a lightweight User Behavior Analytics (UBA) system designed to detect insider threats by analyzing user activity logs. The system uses Isolation Forest machine learning models to identify anomalies across 12 different threat categories, from large file transfers to database tampering.
+**JIREH UBA-LITE** is a lightweight User Behavior Analytics (UBA) system designed to detect insider threats by analyzing user activity logs. The system uses Isolation Forest machine learning models to identify anomalies across 12 different threat categories, from large file transfers to database tampering.
 
 ### Key Features
 

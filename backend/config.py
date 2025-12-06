@@ -1,5 +1,5 @@
 """
-Configuration settings for UBA-Lite application
+Configuration settings for JIREH UBA-LITE application
 """
 import os
 from pathlib import Path

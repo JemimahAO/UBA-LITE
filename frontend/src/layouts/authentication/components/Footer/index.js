@@ -30,13 +30,13 @@ function Footer() {
             sx={{ textAlign: "center", fontWeight: "400 !important" }}
             color="text"
           >
-            © {new Date().getFullYear()} Joel Ntujo — UBA-Lite
+            © {new Date().getFullYear()} Joel Ntujo — JIREH UBA-LITE
           </VuiTypography>
         </Grid>
         <Grid item xs={10}>
           <VuiBox display="flex" justifyContent="center" flexWrap="wrap" mb={3}>
             <VuiTypography variant="body2" color="text">
-              UBA-Lite Insider Threat Detection Platform
+              JIREH UBA-LITE Insider Threat Detection Platform
             </VuiTypography>
           </VuiBox>
         </Grid>

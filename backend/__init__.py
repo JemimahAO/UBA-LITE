@@ -1,5 +1,5 @@
 """
-UBA-Lite: Log-Based Insider Threat Detection System
+JIREH UBA-LITE: Log-Based Insider Threat Detection System
 Backend Package
 """
 

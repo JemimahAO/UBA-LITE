@@ -1,5 +1,5 @@
 """
-API routes for UBA-Lite
+API routes for JIREH UBA-LITE
 """
 from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, Query
 from sqlalchemy.orm import Session

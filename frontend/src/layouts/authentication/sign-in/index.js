@@ -76,7 +76,7 @@ function SignIn() {
       color="white"
       description="Enter your username and password to sign in"
       premotto="INSIDER THREAT DETECTION:"
-      motto="UBA-LITE DASHBOARD"
+      motto="JIREH UBA-LITE DASHBOARD"
       image={bgSignIn}
     >
       <VuiBox component="form" role="form" onSubmit={handleSignIn}>

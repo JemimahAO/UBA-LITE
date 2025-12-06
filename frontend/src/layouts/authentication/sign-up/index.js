@@ -82,10 +82,10 @@ function SignUp() {
     <CoverLayout
       title="Welcome!"
       color="white"
-      description="Create your account to access the UBA-Lite platform"
+      description="Create your account to access the JIREH UBA-LITE platform"
       image={bgSignIn}
       premotto="INSIDER THREAT DETECTION:"
-      motto="UBA-LITE DASHBOARD"
+      motto="JIREH UBA-LITE DASHBOARD"
       cardContent
     >
       <GradientBorder borderRadius={borders.borderRadius.form} minWidth="100%" maxWidth="100%">

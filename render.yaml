@@ -1,5 +1,5 @@
 services:
-  # Backend API Service
+  # Backend API Service for JIREH UBA-LITE
   - type: web
     name: uba-lite-api
     runtime: python
@@ -17,7 +17,7 @@ services:
     healthCheckPath: /health
     autoDeploy: true
 
-  # Frontend Static Site
+  # Frontend Static Site for JIREH UBA-LITE
   - type: web
     name: uba-lite-frontend
     runtime: static

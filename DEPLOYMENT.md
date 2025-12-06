@@ -1,6 +1,6 @@
-# UBA-LITE Deployment Guide
+# JIREH UBA-LITE Deployment Guide
 
-Deploy UBA-LITE for free on Render.com and get a live demo link!
+Deploy JIREH UBA-LITE for free on Render.com and get a live demo link!
 
 ---
 
@@ -22,7 +22,7 @@ git init
 git add .
 
 # Commit
-git commit -m "Initial commit - UBA-LITE Insider Threat Detection"
+git commit -m "Initial commit - JIREH UBA-LITE Insider Threat Detection"
 
 # Create repo on GitHub, then:
 git remote add origin https://github.com/YOUR_USERNAME/uba-lite.git
@@ -140,7 +140,7 @@ npm start
 
 Once deployed, share your demo link:
 
-> "Check out UBA-LITE, my insider threat detection system!
+> "Check out JIREH UBA-LITE, my insider threat detection system!
 > Live demo: https://uba-lite-frontend.onrender.com
 > 
 > Features:
