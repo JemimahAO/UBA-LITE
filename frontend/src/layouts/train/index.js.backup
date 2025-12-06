@@ -1,0 +1,311 @@
+import { useState, useEffect } from "react";
+
+// @mui material components
+import Card from "@mui/material/Card";
+import Grid from "@mui/material/Grid";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+
+// Vision UI Dashboard React components
+import VuiBox from "components/VuiBox";
+import VuiTypography from "components/VuiTypography";
+import VuiButton from "components/VuiButton";
+import VuiInput from "components/VuiInput";
+import GradientBorder from "examples/GradientBorder";
+
+// Vision UI Dashboard React example components
+import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
+import DashboardNavbar from "examples/Navbars/DashboardNavbar";
+import Footer from "examples/Footer";
+
+// API
+import { modelAPI, uploadAPI } from "services/api";
+
+// Vision UI Dashboard assets
+import radialGradient from "assets/theme/functions/radialGradient";
+import palette from "assets/theme/base/colors";
+import borders from "assets/theme/base/borders";
+
+// Icons
+import { IoBrain } from "react-icons/io5";
+
+function TrainModel() {
+  const [files, setFiles] = useState([]);
+  const [models, setModels] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [training, setTraining] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    model_type: 'isolation_forest',
+    file_id: '',
+    contamination: 0.1,
+    n_estimators: 100,
+  });
+
+  useEffect(() => {
+    fetchFiles();
+    fetchModels();
+  }, []);
+
+  const fetchFiles = async () => {
+    try {
+      const response = await uploadAPI.getUploads();
+      setFiles(response.data || []);
+    } catch (error) {
+      console.error('Error fetching files:', error);
+    }
+  };
+
+  const fetchModels = async () => {
+    try {
+      const response = await modelAPI.getModels();
+      setModels(response.data.models || []);
+    } catch (error) {
+      console.error('Error fetching models:', error);
+    }
+  };
+
+  const handleTrain = async (e) => {
+    e.preventDefault();
+    setTraining(true);
+    
+    try {
+      await modelAPI.trainModel({
+        model_type: formData.model_type,
+        file_id: parseInt(formData.file_id),
+        contamination: parseFloat(formData.contamination),
+        n_estimators: parseInt(formData.n_estimators),
+      });
+      
+      alert('Model training started successfully!');
+      fetchModels();
+      
+      // Reset form
+      setFormData({
+        model_type: 'isolation_forest',
+        file_id: '',
+        contamination: 0.1,
+        n_estimators: 100,
+      });
+    } catch (error) {
+      alert('Error training model: ' + (error.response?.data?.detail || error.message));
+    } finally {
+      setTraining(false);
+    }
+  };
+
+  return (
+    <DashboardLayout>
+      <DashboardNavbar />
+      <VuiBox py={3}>
+        {/* Header */}
+        <VuiBox mb={3}>
+          <Grid container spacing={3}>
+            <Grid item xs={12}>
+              <Card>
+                <VuiBox p={3}>
+                  <VuiBox display="flex" alignItems="center" mb={1}>
+                    <IoBrain size="30px" color="#0075ff" style={{ marginRight: '12px' }} />
+                    <VuiTypography variant="h4" color="white" fontWeight="bold">
+                      Train ML Model
+                    </VuiTypography>
+                  </VuiBox>
+                  <VuiTypography variant="body2" color="text">
+                    Train anomaly detection models using uploaded log files
+                  </VuiTypography>
+                </VuiBox>
+              </Card>
+            </Grid>
+          </Grid>
+        </VuiBox>
+
+        <Grid container spacing={3}>
+          {/* Training Form */}
+          <Grid item xs={12} lg={6}>
+            <Card>
+              <VuiBox p={3}>
+                <VuiTypography variant="h5" color="white" fontWeight="bold" mb={3}>
+                  Training Configuration
+                </VuiTypography>
+
+                <form onSubmit={handleTrain}>
+                  <VuiBox mb={3}>
+                    <VuiBox mb={1}>
+                      <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+                        Model Type
+                      </VuiTypography>
+                    </VuiBox>
+                    <Select
+                      value={formData.model_type}
+                      onChange={(e) => setFormData({ ...formData, model_type: e.target.value })}
+                      sx={{
+                        width: '100%',
+                        backgroundColor: '#0f1535',
+                        color: 'white',
+                        borderRadius: '8px',
+                        '& .MuiOutlinedInput-notchedOutline': {
+                          borderColor: 'rgba(226, 232, 240, 0.3)',
+                        },
+                        '&:hover .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#0075ff',
+                        },
+                      }}
+                    >
+                      <MenuItem value="isolation_forest">Isolation Forest</MenuItem>
+                      <MenuItem value="autoencoder">Autoencoder</MenuItem>
+                      <MenuItem value="one_class_svm">One-Class SVM</MenuItem>
+                    </Select>
+                  </VuiBox>
+
+                  <VuiBox mb={3}>
+                    <VuiBox mb={1}>
+                      <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+                        Select Training File
+                      </VuiTypography>
+                    </VuiBox>
+                    <Select
+                      value={formData.file_id}
+                      onChange={(e) => setFormData({ ...formData, file_id: e.target.value })}
+                      required
+                      sx={{
+                        width: '100%',
+                        backgroundColor: '#0f1535',
+                        color: 'white',
+                        borderRadius: '8px',
+                        '& .MuiOutlinedInput-notchedOutline': {
+                          borderColor: 'rgba(226, 232, 240, 0.3)',
+                        },
+                        '&:hover .MuiOutlinedInput-notchedOutline': {
+                          borderColor: '#0075ff',
+                        },
+                      }}
+                    >
+                      <MenuItem value="">Select a file...</MenuItem>
+                      {files.map((file) => (
+                        <MenuItem key={file.id} value={file.id}>
+                          {file.filename} ({file.rows} rows)
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </VuiBox>
+
+                  <VuiBox mb={3}>
+                    <VuiBox mb={1}>
+                      <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+                        Contamination (0.0 - 0.5)
+                      </VuiTypography>
+                    </VuiBox>
+                    <GradientBorder
+                      minWidth="100%"
+                      borderRadius={borders.borderRadius.lg}
+                      padding="1px"
+                      backgroundImage={radialGradient(
+                        palette.gradients.borderLight.main,
+                        palette.gradients.borderLight.state,
+                        palette.gradients.borderLight.angle
+                      )}
+                    >
+                      <VuiInput
+                        type="number"
+                        step="0.01"
+                        min="0"
+                        max="0.5"
+                        value={formData.contamination}
+                        onChange={(e) => setFormData({ ...formData, contamination: e.target.value })}
+                        placeholder="0.1"
+                      />
+                    </GradientBorder>
+                  </VuiBox>
+
+                  <VuiBox mb={3}>
+                    <VuiBox mb={1}>
+                      <VuiTypography component="label" variant="button" color="white" fontWeight="medium">
+                        Number of Estimators
+                      </VuiTypography>
+                    </VuiBox>
+                    <GradientBorder
+                      minWidth="100%"
+                      borderRadius={borders.borderRadius.lg}
+                      padding="1px"
+                      backgroundImage={radialGradient(
+                        palette.gradients.borderLight.main,
+                        palette.gradients.borderLight.state,
+                        palette.gradients.borderLight.angle
+                      )}
+                    >
+                      <VuiInput
+                        type="number"
+                        min="10"
+                        max="500"
+                        value={formData.n_estimators}
+                        onChange={(e) => setFormData({ ...formData, n_estimators: e.target.value })}
+                        placeholder="100"
+                      />
+                    </GradientBorder>
+                  </VuiBox>
+
+                  <VuiButton
+                    type="submit"
+                    color="info"
+                    fullWidth
+                    disabled={training || !formData.file_id}
+                  >
+                    {training ? 'TRAINING...' : 'START TRAINING'}
+                  </VuiButton>
+                </form>
+              </VuiBox>
+            </Card>
+          </Grid>
+
+          {/* Trained Models List */}
+          <Grid item xs={12} lg={6}>
+            <Card sx={{ height: '100%' }}>
+              <VuiBox p={3}>
+                <VuiTypography variant="h5" color="white" fontWeight="bold" mb={3}>
+                  Trained Models ({models.length})
+                </VuiTypography>
+
+                {models.length === 0 ? (
+                  <VuiBox textAlign="center" py={5}>
+                    <IoBrain size="60px" color="rgba(255, 255, 255, 0.2)" />
+                    <VuiTypography variant="body2" color="text" mt={2}>
+                      No models trained yet
+                    </VuiTypography>
+                  </VuiBox>
+                ) : (
+                  <VuiBox>
+                    {models.map((model) => (
+                      <VuiBox
+                        key={model.id}
+                        mb={2}
+                        p={2}
+                        sx={{
+                          backgroundColor: 'rgba(6, 11, 40, 0.5)',
+                          borderRadius: '12px',
+                          border: '1px solid rgba(86, 87, 122, 0.3)',
+                        }}
+                      >
+                        <VuiTypography variant="button" color="white" fontWeight="bold">
+                          {model.model_type.replace('_', ' ').toUpperCase()}
+                        </VuiTypography>
+                        <VuiTypography variant="caption" color="text" display="block">
+                          ID: {model.id} | Accuracy: {(model.accuracy * 100).toFixed(2)}%
+                        </VuiTypography>
+                        <VuiTypography variant="caption" color="text" display="block">
+                          Trained: {new Date(model.created_at).toLocaleString()}
+                        </VuiTypography>
+                      </VuiBox>
+                    ))}
+                  </VuiBox>
+                )}
+              </VuiBox>
+            </Card>
+          </Grid>
+        </Grid>
+      </VuiBox>
+      <Footer />
+    </DashboardLayout>
+  );
+}
+
+export default TrainModel;
