@@ -1,0 +1,6 @@
+user_id,file_size,destination,timestamp,label
+user1,1048576,internal_server,2024-10-01T09:15:00,normal
+user2,524288,internal_server,2024-10-01T09:45:00,normal
+user3,7340032,cloud_storage,2024-10-02T10:10:00,normal
+user2,1073741824,cloud_storage,2024-10-02T23:56:00,anomalous
+user4,1610612736,external_drive,2024-10-03T01:20:00,anomalous

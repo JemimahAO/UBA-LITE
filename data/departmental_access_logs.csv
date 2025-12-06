@@ -1,0 +1,6 @@
+user_id,department_name,action,timestamp,label
+user1,IT,access,2024-10-01T09:00:00,normal
+user2,HR,access,2024-10-01T09:05:00,normal
+user3,Finance,access,2024-10-01T09:10:00,normal
+user3,Executive,access,2024-10-02T21:15:00,anomalous
+user4,Executive,access,2024-10-02T21:20:00,anomalous

@@ -1,0 +1,6 @@
+user_id,software_name,device_id,timestamp,label
+user1,office_suite.msi,device_1,2024-10-01T08:30:00,normal
+user2,antivirus_update.exe,device_2,2024-10-01T09:00:00,normal
+user3,malicious_tool.exe,device_2,2024-10-02T22:10:00,anomalous
+user3,unauthorized_app.msi,device_2,2024-10-02T22:12:00,anomalous
+user4,hack_tool.py,device_3,2024-10-03T13:25:00,anomalous

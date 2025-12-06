@@ -1,0 +1,6 @@
+user_id,database_name,record_id,field,old_value,new_value,alteration_time,label
+user1,hr_db,1010,salary,45000,46000,2024-10-01T09:00:00,normal
+user2,finance_db,2020,salary,52000,52500,2024-10-01T09:15:00,normal
+user3,payroll_db,3030,salary,38000,78000,2024-10-02T22:40:00,anomalous
+user3,payroll_db,3031,salary,39000,83000,2024-10-02T22:45:00,anomalous
+user4,finance_db,2040,salary,60000,60500,2024-10-03T10:30:00,normal

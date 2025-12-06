@@ -1,0 +1,6 @@
+user_id,tool_name,device_id,timestamp,label
+user1,wireshark,device_1,2024-10-01T10:00:00,normal
+user2,nmap,device_1,2024-10-01T10:30:00,normal
+user3,metasploit,device_3,2024-10-02T23:05:00,anomalous
+user3,nmap,device_3,2024-10-02T23:10:00,anomalous
+user4,metasploit,device_2,2024-10-03T01:45:00,anomalous

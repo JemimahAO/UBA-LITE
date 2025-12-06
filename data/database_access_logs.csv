@@ -1,0 +1,6 @@
+user_id,database_name,action,timestamp,label
+user1,hr_db,read,2024-10-01T09:00:00,normal
+user2,finance_db,read,2024-10-01T09:10:00,normal
+user3,engineering_db,write,2024-10-01T10:30:00,normal
+user2,finance_db,delete,2024-10-02T19:45:00,anomalous
+user4,payroll_db,delete,2024-10-02T20:10:00,anomalous

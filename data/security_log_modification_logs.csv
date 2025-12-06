@@ -1,0 +1,6 @@
+user_id,log_file,modifications,timestamp,label
+user1,security.log,Rotated log file and archived old entries,2024-10-01T07:50:00,normal
+user2,security.log,Rotated log file and archived old entries,2024-10-01T08:10:00,normal
+user3,security.log,Removed multiple entries related to admin logins and failed access attempts,2024-10-02T23:00:00,anomalous
+user4,security.log,Removed multiple entries related to failed access attempts,2024-10-02T23:05:00,anomalous
+user5,security.log,Rotated log file and archived old entries,2024-10-03T09:20:00,normal

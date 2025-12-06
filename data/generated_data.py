@@ -1,4 +1,5 @@
 import json
+import csv
 import random
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -261,13 +262,15 @@ def generate_database_record_modification_logs(num_logs, anomaly_ratio=0.2):
         logs.append(log)
     return logs
 
+import csv
+import random
+from datetime import datetime, timedelta
+from pathlib import Path
+
 if __name__ == "__main__":
     # Generate and save logs into this repo's data directory
     base_dir = Path(__file__).resolve().parent
     log_generators = {
-        "user_activity_logs": generate_user_activity_logs,
-        "large_file_transfer_logs": generate_large_file_transfer_logs,
-        "file_access_logs": generate_file_access_logs,
         "database_access_logs": generate_database_access_logs,
         "privileged_access_logs": generate_privileged_access_logs,
         "legacy_system_access_logs": generate_legacy_system_access_logs,
@@ -282,8 +285,14 @@ if __name__ == "__main__":
     }
 
     for log_type, generator in log_generators.items():
-        logs = generator(80)  # Generate 80 logs for each type with a mix of normal and anomalous
-        out_path = base_dir / f"{log_type}.json"
-        with out_path.open("w", encoding="utf-8") as f:
-            json.dump(logs, f, indent=4)
+        logs = generator(80)
+        if not logs:
+            continue
+
+        fieldnames = sorted({key for log in logs for key in log.keys()})
+        out_path = base_dir / f"{log_type}.csv"
+        with out_path.open("w", encoding="utf-8", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames)
+            writer.writeheader()
+            writer.writerows(logs)
         print(f"{log_type.replace('_', ' ').title()} generated successfully at {out_path}!")

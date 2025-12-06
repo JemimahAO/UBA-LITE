@@ -1,0 +1,6 @@
+user_id,command_used,device_id,timestamp,label
+user1,cmd.exe,device_1,2024-10-01T09:00:00,normal
+user2,powershell.exe,device_1,2024-10-01T09:15:00,normal
+user3,powershell.exe,device_3,2024-10-02T23:30:00,anomalous
+user3,cmd.exe,device_3,2024-10-02T23:31:30,anomalous
+user4,bash,device_2,2024-10-03T06:45:00,normal

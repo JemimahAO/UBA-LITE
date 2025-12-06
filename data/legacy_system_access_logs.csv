@@ -1,0 +1,6 @@
+user_id,system_name,action,timestamp,label
+user1,legacy_system_1,login,2024-10-01T07:50:00,normal
+user2,legacy_system_2,login,2024-10-01T08:10:00,normal
+user3,legacy_system_4,access,2024-10-02T18:30:00,anomalous
+user3,legacy_system_4,access,2024-10-02T18:31:30,anomalous
+user5,legacy_system_3,logout,2024-10-03T17:00:00,normal

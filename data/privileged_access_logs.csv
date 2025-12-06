@@ -1,0 +1,6 @@
+user_id,access_level,action,timestamp,label
+user1,privilege_1,access,2024-10-01T08:00:00,normal
+user2,privilege_2,access,2024-10-01T08:30:00,normal
+user3,privilege_4,grant,2024-10-02T09:45:00,anomalous
+user3,privilege_5,access,2024-10-02T10:00:00,anomalous
+user4,privilege_1,revoke,2024-10-03T11:20:00,normal

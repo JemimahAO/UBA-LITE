@@ -1,0 +1,6 @@
+user_id,file_count,target_directory,timestamp,label
+user1,12,/home/user1/docs,2024-10-01T08:00:00,normal
+user2,25,/home/user2/shared,2024-10-01T09:10:00,normal
+user3,240,/home/user3/projects,2024-10-02T20:05:00,anomalous
+user3,410,/home/user3/projects,2024-10-02T20:06:00,anomalous
+user4,18,/home/user4/downloads,2024-10-03T11:30:00,normal
