@@ -69,6 +69,7 @@ function formatDate(value) {
 function DetectAnomalies() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [sessions, setSessions] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [orderBy, setOrderBy] = useState("detected_at");
@@ -82,6 +83,7 @@ function DetectAnomalies() {
   const fetchSessions = async () => {
     setLoading(true);
     setError("");
+    setSuccess("");
     try {
       const response = await detectionAPI.getSessions();
       const payload = response.data?.sessions || [];
@@ -139,6 +141,8 @@ function DetectAnomalies() {
 
   const handleGenerateReport = async (session) => {
     setReportGenerating(true);
+    setError("");
+    setSuccess("");
     try {
       const response = await detectionAPI.generateReport(session.session_id);
       const reportData = response.data;
@@ -460,13 +464,21 @@ function DetectAnomalies() {
                 </VuiBox>
               </VuiBox>
 
-              {error && (
+              {(error || success) && (
                 <VuiBox px={3} pb={2}>
-                  <VuiTypography variant="caption" color="error">
-                    {error}
-                  </VuiTypography>
+                  {error && (
+                    <VuiTypography variant="caption" color="error" display="block">
+                      {error}
+                    </VuiTypography>
+                  )}
+                  {success && (
+                    <VuiTypography variant="caption" color="success" display="block">
+                      {success}
+                    </VuiTypography>
+                  )}
                 </VuiBox>
               )}
+
 
               <TableContainer
                 sx={{
@@ -628,7 +640,7 @@ function DetectAnomalies() {
                                 onClick={() => handleGenerateReport(session)}
                                 disabled={reportGenerating}
                               >
-                                {reportGenerating ? "Generating..." : "Generate Report"}
+                                {reportGenerating ? "Exporting..." : "Export JSON Report"}
                               </VuiButton>
                             </VuiBox>
                           </TableCell>
@@ -804,7 +816,7 @@ function DetectAnomalies() {
                   disabled={reportGenerating}
                   onClick={() => handleGenerateReport(selectedSession)}
                 >
-                  {reportGenerating ? "Generating..." : "Generate PDF Report"}
+                  {reportGenerating ? "Exporting..." : "Export JSON Report"}
                 </VuiButton>
               </Card>
             </VuiBox>
