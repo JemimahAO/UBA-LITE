@@ -1,17 +1,24 @@
-"""
-Main FastAPI application entry point
-"""
+"""Main FastAPI application entry point"""
+import os
+import logging
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
-import logging
-from pathlib import Path
+from sqlalchemy.orm import Session
 
 from backend.config import CORS_ORIGINS, LOG_LEVEL, API_HOST, API_PORT, API_RELOAD
 from backend.api.routes import router
-from backend.api.auth import auth_router
-from backend.database.db import engine, Base
+from backend.api.auth import (
+    auth_router,
+    get_password_hash,
+    DEFAULT_NOTIFICATION_PREFERENCES,
+    _normalize_preferences,
+)
+from backend.database.db import engine, Base, SessionLocal
+from backend.database.models import User, UserProfile
 
 # Configure logging
 logging.basicConfig(level=LOG_LEVEL)
@@ -42,6 +49,55 @@ app.add_middleware(
 UPLOAD_DIR = Path("uploads")
 UPLOAD_DIR.mkdir(exist_ok=True)
 app.mount("/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+
+@app.on_event("startup")
+def ensure_demo_user() -> None:
+    """Create a default demo user if none exists.
+
+    This avoids having to re-register after each redeploy or DB reset.
+    Credentials (can be overridden via Render env vars):
+      - username: DEMO_USERNAME (default: "demo")
+      - email:    DEMO_EMAIL    (default: "demo@example.com")
+      - password: DEMO_PASSWORD (default: "Demo1234!")
+    """
+    db: Session = SessionLocal()
+    try:
+        username = os.getenv("DEMO_USERNAME", "demo")
+        email = os.getenv("DEMO_EMAIL", "demo@example.com")
+        password = os.getenv("DEMO_PASSWORD", "Demo1234!")
+
+        existing = db.query(User).filter(User.username == username).first()
+        if existing:
+            return
+
+        hashed = get_password_hash(password)
+        user = User(
+            username=username,
+            email=email,
+            hashed_password=hashed,
+            is_active=1,
+            is_admin=0,
+        )
+        db.add(user)
+        db.commit()
+        db.refresh(user)
+
+        # Initialize a basic profile with default notification preferences
+        prefs = _normalize_preferences(DEFAULT_NOTIFICATION_PREFERENCES)
+        profile = UserProfile(
+            user_id=user.id,
+            notification_preferences=prefs,
+        )
+        db.add(profile)
+        db.commit()
+        logger.info(
+            "Demo user initialized: username='%s', email='%s'", username, email
+        )
+    except Exception as exc:  # pragma: no cover - best-effort helper
+        logger.warning("Failed to initialize demo user: %s", exc)
+    finally:
+        db.close()
+
 
 # Include API routes
 app.include_router(auth_router, prefix="/api")
