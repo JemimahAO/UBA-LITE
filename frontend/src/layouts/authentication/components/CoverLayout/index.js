@@ -78,10 +78,12 @@ function CoverLayout({
       >
         <VuiBox
           height="100%"
+          px={6}
           sx={{
             backgroundImage: `url(${image})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
+            transform: "translateX(8%)",
           }}
           display="flex"
           justifyContent="center"
@@ -89,7 +91,7 @@ function CoverLayout({
           flexDirection="column"
         >
           <VuiTypography
-            textAlign={cardContent ? "center" : "start"}
+            textAlign="center"
             variant="h6"
             fontWeight="bold"
             color="white"
@@ -99,7 +101,7 @@ function CoverLayout({
             {premotto}
           </VuiTypography>
           <VuiTypography
-            textAlign={cardContent ? "center" : "start"}
+            textAlign="center"
             variant="h1"
             fontWeight="black"
             color="logo"
