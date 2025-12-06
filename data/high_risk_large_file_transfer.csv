@@ -1,0 +1,17 @@
+user_id,file_size,destination,timestamp,label
+user1,1048576,internal_server,2024-10-01T09:00:00,normal
+user2,2097152,internal_server,2024-10-01T09:05:00,normal
+user3,3145728,internal_server,2024-10-01T09:10:00,normal
+user1,5242880,internal_server,2024-10-01T10:00:00,normal
+user2,7340032,internal_server,2024-10-01T10:05:00,normal
+user3,9437184,internal_server,2024-10-01T10:10:00,normal
+user1,15728640,internal_server,2024-10-01T11:00:00,normal
+user2,18874368,internal_server,2024-10-01T11:05:00,normal
+user3,22020096,internal_server,2024-10-01T11:10:00,normal
+user4,26214400,internal_server,2024-10-01T11:15:00,normal
+user5,1610612736,cloud_storage,2024-10-02T23:50:00,anomalous
+user5,1879048192,cloud_storage,2024-10-02T23:52:00,anomalous
+user5,2013265920,external_drive,2024-10-02T23:54:00,anomalous
+user5,1744830464,cloud_storage,2024-10-03T00:02:00,anomalous
+user5,1879048192,external_drive,2024-10-03T00:04:00,anomalous
+user5,2147483648,cloud_storage,2024-10-03T00:06:00,anomalous
