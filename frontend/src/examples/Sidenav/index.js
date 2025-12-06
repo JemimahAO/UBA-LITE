@@ -42,7 +42,9 @@ function Sidenav({ color, brandName, routes, ...rest }) {
   useEffect(() => {
     // A function that sets the mini state of the sidenav.
     function handleMiniSidenav() {
-      setMiniSidenav(dispatch, window.innerWidth < 1200);
+      // Only collapse to mini sidenav on smaller screens so the logo/brand
+      // remain clearly visible on typical laptop/desktop widths.
+      setMiniSidenav(dispatch, window.innerWidth < 992);
     }
 
     /** 
@@ -164,14 +166,14 @@ function Sidenav({ color, brandName, routes, ...rest }) {
                 })
               }
             >
-              <SimmmpleLogo size="24px" />
+              <SimmmpleLogo size="30px" />
             </VuiBox>
             <VuiTypography
               variant="button"
               textGradient={true}
               color="logo"
-              fontSize={14}
-              letterSpacing={2}
+              fontSize={16}
+              letterSpacing={1.5}
               fontWeight="medium"
               sx={
                 ((theme) => sidenavLogoLabel(theme, { miniSidenav, transparentSidenav }),

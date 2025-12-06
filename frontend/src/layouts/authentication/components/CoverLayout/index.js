@@ -60,7 +60,7 @@ function CoverLayout({
     >
       <VuiBox
         height="100%"
-        width="50vw"
+        width="40vw"
         display={{ xs: "none", md: "block" }}
         position="absolute"
         top={0}
@@ -68,7 +68,7 @@ function CoverLayout({
         sx={({ breakpoints }) => ({
           overflow: "hidden",
           [breakpoints.down("xl")]: {
-            mr: "100px",
+            mr: "40px",
           },
           [breakpoints.down("lg")]: {
             display: "none",
@@ -93,8 +93,8 @@ function CoverLayout({
             variant="h6"
             fontWeight="bold"
             color="white"
-            mb="15px"
-            sx={{ mb: 2, letterSpacing: "12px", fontSize: "1rem" }}
+            mb="12px"
+            sx={{ mb: 2, letterSpacing: "8px", fontSize: "0.9rem" }}
           >
             {premotto}
           </VuiTypography>
@@ -103,9 +103,9 @@ function CoverLayout({
             variant="h1"
             fontWeight="black"
             color="logo"
-            mb="10px"
+            mb="8px"
             textGradient
-            sx={{ letterSpacing: "16px", fontSize: "4rem !important", fontWeight: "900 !important" }}
+            sx={{ letterSpacing: "10px", fontSize: "3rem !important", fontWeight: "900 !important" }}
           >
             {motto}
           </VuiTypography>
