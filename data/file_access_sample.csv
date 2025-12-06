@@ -1,0 +1,6 @@
+user_id,file_path,action,timestamp
+user1,/home/user1/docs/report.docx,access,2024-10-01T09:15:00
+user2,/home/user2/shared/budget.xlsx,access,2024-10-01T09:20:00
+user1,/home/user1/downloads/tool.exe,modify,2024-10-02T11:05:30
+user3,/home/user3/projects/spec.pdf,access,2024-10-03T14:12:10
+user2,/home/user2/docs/notes.txt,delete,2024-10-04T16:45:00
